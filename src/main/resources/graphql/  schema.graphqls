@@ -1,0 +1,36 @@
+type PhoneDTO {
+    idPhone: ID
+    model: String
+    color: String
+    imei: String
+    price: Float
+}
+
+input PhoneInput {
+    model: String
+    color: String
+    imei: String
+    price: Float
+}
+
+type Query {
+    getPhoneByModel(model: String): [PhoneDTO]
+    getPhoneByModelAndPrice(model: String, price: Float): [PhoneDTO]
+    getPhoneById(id: ID): PhoneDTO
+    getPhones: [PhoneDTO]
+    getPhoneByIMEI(imei: String): PhoneDTO
+    getPhonesByPriceRange(min: Float, max: Float): [PhoneDTO]
+}
+
+type Mutation {
+    savePhone(phone: PhoneInput): PhoneDTO
+    deletePhone(id: ID): PhoneDTO
+    updatePhone(id: ID, phone: PhoneInput): PhoneDTO
+    updatePhonePrice(id: ID, price: Float): PhoneDTO
+}
+
+type Subscription {
+    phoneAdded: PhoneDTO
+    phoneUpdated: PhoneDTO
+    phoneDeleted: ID
+}
